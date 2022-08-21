@@ -1,7 +1,10 @@
 <template>
   <div>
-    <router-view/>
-    <main-tab-bar/>
+    <keep-alive exclude="Detail">
+      <router-view/>
+    </keep-alive>
+    
+    <main-tab-bar v-if="!/^\/detail/.test($route.path)"></main-tab-bar>  <!-- 详情页不显示(此处为正则判断) -->
   </div>
 </template>
 

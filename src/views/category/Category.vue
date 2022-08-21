@@ -99,7 +99,16 @@
     },
     mounted(){
       this.scroll = new BScroll(document.querySelector('.wrapper'),{
+        probeType: 3,
+        pullUpLoad: true
+      })
 
+      this.scroll.on('scroll',(position) => {
+        window.console.log(position)
+      })
+
+      this.scroll.on('pullingUp',() => {
+         window.console.log('sljzgd')
       })
     }
 
