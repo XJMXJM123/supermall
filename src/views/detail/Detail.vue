@@ -14,6 +14,7 @@
 
     <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
     <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
+    <toast :message="message" :is-show="show"></toast>
   </div>
 </template>
 
@@ -26,6 +27,7 @@
   import DetailParamInfo from './childComps/DetailParamInfo'
   import DetailComment from './childComps/DetailComment'
   import DetailBottomBar from './childComps/DetailBottomBar.vue'
+  import Toast from 'components/common/toast/Toast'
 
   import GoodsList from 'components/content/goods/GoodsList'
   import BackTop from 'components/content/backTop/BackTop'
@@ -35,6 +37,8 @@
 
   import { getDetail, getRecommend, Goods, Shop,GoodsParam } from 'network/detail'
   import { debounce } from 'common/utils';
+
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'Detail',
@@ -49,7 +53,8 @@
       GoodsList,
       DetailBottomBar,
       BackTop,
-      Scroll
+      Scroll,
+      Toast
     },
     data (){
       return {
@@ -64,7 +69,9 @@
         themeTopYs: [],
         getThemeTopYs: null,
         currentIndex: 0,
-        isShowBackTop: false
+        isShowBackTop: false,
+        show: false,
+        message: ''
       }
     },
     created() {
@@ -117,6 +124,7 @@
       })
     },
     methods: {
+      ...mapActions(['addCart']),
       imageLoad() {
         this.$refs.scroll.refresh()
         this.getThemeTopYs()
@@ -153,7 +161,28 @@
 
         //2.将商品添加到购物车里
         // this.$store.commit('addCart', product)
-        this.$store.dispatch('addCart', product)
+      //   this.$store.dispatch('addCart', product).then(res => {
+      //      this.show = true;
+      // this.message = res;
+      // setTimeout(()=>{
+      //   this.show = false
+      //   this.message=''
+      // },1500)
+      //   })
+
+        // this.addCart(product).then(res => {
+        //   this.$toast.show(res, 1500)
+        //   window.console.log(this.$toast.methods)
+        // })
+
+        this.addCart(product).then(res => {
+          this.show = true;
+          this.message = res;
+          setTimeout(()=>{
+          this.show = false
+          this.message=''
+          },1500)
+        })
       }
     }
   }

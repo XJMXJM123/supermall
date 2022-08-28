@@ -10,12 +10,15 @@
             :pull-up-load="true">
       <cart-list></cart-list>
     </scroll>
+
+    <cart-bottom-bar class="bottom"></cart-bottom-bar>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/navbar/NavBar';
 import CartList from './childComps/CartList.vue'
+import CartBottomBar from './childComps/CartBottomBar';
 
 import Scroll from 'components/common/scroll/Scroll'
 
@@ -26,6 +29,7 @@ export default {
   components:{
     NavBar,
     CartList,
+    CartBottomBar,
     Scroll
   },
   computed: {
@@ -54,8 +58,14 @@ export default {
 
     position: absolute;
     top: 44px;
-    bottom: 49px;
+    bottom: 89px;
     left: 0;
     right: 0;
+}
+.bottom{
+  position: fixed;
+  bottom: 49px;
+  right: 0;
+  left: 0;
 }
 </style>

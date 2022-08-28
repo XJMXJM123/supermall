@@ -5,14 +5,17 @@
 </template>
 
 <script>
+
 export default {
   name: "CheckButton",
   props: {
     isChecked: {
       type: Boolean,
-      default: false
+      default(){
+        return false
+      }
     }
-  }
+  },
 }
 </script>
 

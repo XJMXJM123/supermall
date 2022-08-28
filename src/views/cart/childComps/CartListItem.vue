@@ -1,7 +1,7 @@
 <template>
   <div id="shop-item">
      <div class="item-selector">
-      <CheckButton :is-checked="itemInfo.isChecked" @click.native="checkClick"></CheckButton>
+      <CheckButton :is-checked="itemInfo.checked" @click.native="checkClick"></CheckButton>
     </div>
     <div class="item-img">
       <img :src="itemInfo.image" alt="商品图片">
@@ -35,8 +35,7 @@ export default {
   },
   methods: {
     checkClick(){
-      this.itemInfo.isChecked =! this.itemInfo.isChecked
-      this.$store.dispatch('addCart', this.itemInfo)
+      this.itemInfo.checked =! this.itemInfo.checked
     },
     click(){
       this.$router.push('/detail/' + this.itemInfo.iid)
